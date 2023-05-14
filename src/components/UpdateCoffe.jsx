@@ -1,9 +1,9 @@
 import React from 'react';
-import { Link, useLoaderData } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import Swal from 'sweetalert2';
 // import swal from 'sweetalert';
 
-const UpdateCoffe = ({ product }) => {
+const UpdateCoffe = ({ product, products, setProducts }) => {
 
     // console.log(product);
 
@@ -24,9 +24,7 @@ const UpdateCoffe = ({ product }) => {
 
                 fetch(`http://localhost:5000/coffee/${_id}`, {
                     method: "DELETE",
-                    headers: {
-                        "content-type": "application/json"
-                    }
+
                 })
                     .then(res => res.json())
                     .then(data => {
@@ -37,6 +35,11 @@ const UpdateCoffe = ({ product }) => {
                                 'Your Coffee has been deleted.',
                                 'success'
                             )
+
+                            const remaining = products.filter(cof =>
+                                cof._id !== _id
+                            )
+                            setProducts(remaining)
                         }
                     })
             }

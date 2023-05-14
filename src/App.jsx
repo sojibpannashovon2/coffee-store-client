@@ -2,11 +2,13 @@
 import { useLoaderData } from 'react-router-dom'
 import './App.css'
 import UpdateCoffe from './components/UpdateCoffe';
+import { useState } from 'react';
 
 function App() {
 
-  const products = useLoaderData()
-  console.log(products);
+  const loggedProducts = useLoaderData()
+  // console.log(loggedProducts);
+  const [products, setProducts] = useState(loggedProducts)
   return (
     <>
       <div>
@@ -15,6 +17,8 @@ function App() {
           {
             products.map(product => <UpdateCoffe key={product._id}
               product={product}
+              products={products}
+              setProducts={setProducts}
             ></UpdateCoffe>)
           }
         </div>
